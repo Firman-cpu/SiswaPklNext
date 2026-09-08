@@ -1,4 +1,5 @@
-import Navbar from '@/components/navigation/navbar/Navbar'; // Sesuaikan path lu bangke
+import Navbar from '@/components/navigation/navbar/Navbar';
+import './globals.css'
 
 export default function RootLayout({
   children,
@@ -8,7 +9,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
+        <Navbar>
+
+        </Navbar>
         {children}
       </body>
     </html>

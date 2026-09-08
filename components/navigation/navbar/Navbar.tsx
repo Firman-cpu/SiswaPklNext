@@ -1,32 +1,42 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Home, Info, LayoutGrid } from 'lucide-react';
 
 export default function Navbar() {
     const pathname = usePathname();
 
-    // Data dummy, ganti sendiri
     const menu = [
-        { path: '/', label: 'Home', icon: '{}' },
-        { path: '/about', label: 'About', icon: '[|]' },
-        { path: '/tabel', label: 'Tabel', icon: '#' },
-        { path: '/com', label: 'Com', icon: '^' }
+        { path: '/', label: 'Home', Icon: Home },
+        { path: '/about', label: 'About', Icon: Info },
+        { path: '/tabel', label: 'Tabel', Icon: LayoutGrid },
     ];
 
     return (
-        <nav className="flex gap-4 p-4 border-b m-4 bg-sky-200">
-            {menu.map((item) => {
-                const isActive = pathname === item.path;
+        <div className="flex justify-center mt-6">
+            <nav className="bg-[#010409] rounded-full border border-[#3d444d] p-1.5 shadow-lg">
+                <div className="flex items-center gap-1">
+                    {menu.map(({ path, label, Icon }) => {
+                        const isActive = pathname === path;
 
-                return (
-                    <Link key={item.path} href={item.path} className="flex items-center gap-2">
-                        <span>{item.icon}</span>
-                        {/* Activate Navigation Links*/}
-                        {isActive && <span>{item.label}</span>}
-                    </Link>
-                );
-            })}
-        </nav>
+                        return (
+                            <Link
+                                key={path}
+                                href={path}
+                                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${isActive
+                                    ? 'bg-[#151b23] text-[#238636] border border-[#3d444d]'
+                                    : 'text-[#f0f6fc] hover:bg-[#151b23]/50 hover:text-[#238636] border border-transparent'
+                                    }`}
+                            >
+                                <Icon size={18} />
+                                {isActive && (
+                                    <span className="text-sm font-semibold">{label}</span>
+                                )}
+                            </Link>
+                        );
+                    })}
+                </div>
+            </nav>
+        </div>
     );
 }
-
